@@ -1,6 +1,6 @@
 export const Decode = () => {
     return (
-        <div>
+        <div className="pages">
             Decode page
         </div>
     )

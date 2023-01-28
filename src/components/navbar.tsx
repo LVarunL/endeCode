@@ -1,33 +1,32 @@
 import {Link} from "react-router-dom"
 import { auth } from '../config/firebase'
 import {useAuthState} from 'react-firebase-hooks/auth'
-import { signOut } from 'firebase/auth'
 export const Navbar = () => {
-    const logOut = async() => {
-        await signOut(auth);
-    }
+   
     const [user] = useAuthState(auth);
     return (
-        <div>
-            <Link to="/">Home  </Link>
+        <div className="navbar">
+           
+            <Link to="/" className="links" >Home  </Link>
             {
                 !user ? 
-                <Link to="/login">Login  </Link> :
+                <Link to="/login" className="links">Login  </Link> :
                 <>
-                    <Link to="/encode">Encode  </Link>
-                    <Link to="/decode">Decode   </Link> 
+                    <Link to="/encode" className="links">Encode  </Link>
+                    <Link to="/decode" className="links">Decode   </Link> 
+                    <Link to="/feedback" className="links">Feedback </Link>
                 </>
             }
             
-            <Link to="/help">Help  </Link>
+            <Link to="/help" className="links">Help  </Link>
             {
                 user && 
-                <>
-                    <p> {user?.displayName} </p>
+                <div className="user">
+                    
                     <img src={user?.photoURL || ""} width="100" height="100"/>
-                    <button onClick={logOut}> Log Out</button>
-                </>
+                </div>
             }
+            
         </div>
     )
 }
