@@ -1,7 +1,9 @@
 export const Encode = () => {
     return (
-        <div>
-            Encode page
+        <div className="encode">
+        <div className="encodeInput">
+            <textarea placeholder="enter your message here..." />
+        </div>
         </div>
     )
 }
