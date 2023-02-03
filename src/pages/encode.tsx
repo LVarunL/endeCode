@@ -1,23 +1,26 @@
 import { useState } from "react";
-import { addDoc, collection, doc } from "firebase/firestore";
+import { addDoc, collection} from "firebase/firestore";
 import { db } from "../config/firebase";
 
 
 export const Encode = () => {
     const [messageToAdd,setMessageToAdd] = useState("");
     const [pw, setPassword] = useState("");
+    const [messageId, setMassageId] = useState("");
     const getmessage=(data:any)=>{
         setMessageToAdd(data.target.value);
     }
-    const messageref = collection(db, "messages"); 
+
     const handlePassword=(data:any)=>{
         setPassword(data.target.value);
     }
     const storeMessage = async ()=>{
-        await addDoc(collection(db,"messages"), {
+        const addedDoc = await addDoc(collection(db,"messages"), {
             message: messageToAdd,
             password: pw
         })
+        setMassageId(addedDoc.id);
+        
     }
         
     return (
@@ -28,6 +31,7 @@ export const Encode = () => {
             <h2>{messageToAdd}</h2>
             {/* <button onClick={()=> Storemessage}>enter</button> */}
             <button onClick={storeMessage}> submit</button>
+            <h2> {messageId} </h2>
         </div>
         </div>
     )
