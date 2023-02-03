@@ -78,11 +78,7 @@
   border-color:peru;
   border-style:outset;
   margin:100px;
-  background-image: 
-  background-position: 10px 10px; 
-  background-repeat: no-repeat;
-  padding: 12px 20px 12px 40px;
-}
+  }
 
 .encode {
   display: flex;
