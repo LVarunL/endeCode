@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc } from "firebase/firestore";
 import { db } from "../config/firebase";
 
-interface CreateFormData{
-    message: string;
-}
+
 export const Encode = () => {
     const [messageToAdd,setMessageToAdd] = useState("");
     const getmessage=(data:any)=>{
@@ -12,22 +10,20 @@ export const Encode = () => {
     }
     const messageref = collection(db, "messages"); 
 
-    const Storemessage = async()=>{
-        await addDoc(collection(messageref,"messsages"), {
+    const Storemessage = async ()=>{
+        await addDoc(collection(db,"messages"), {
             message: messageToAdd
         })
     }
         
     return (
-        <form onSubmit={()=>Storemessage}>
         <div className="encode">
         <div className="encodeInput">
             <textarea placeholder="enter your message here..." onChange={getmessage}/>
             <h2>{messageToAdd}</h2>
             {/* <button onClick={()=> Storemessage}>enter</button> */}
-            <input type="submit"/>
+            <button onClick={Storemessage}> submit</button>
         </div>
         </div>
-        </form>
     )
 }
