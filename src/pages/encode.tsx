@@ -27,7 +27,7 @@ export const Encode = () => {
         <div className="encode">
         <div className="encodeInput">
             <textarea placeholder="enter your message here..." onChange={getmessage}/>
-            <input onChange={handlePassword} type="password" placeholder="password"/>
+            <input onChange={handlePassword} type="password" placeholder="password..."/>
             <h2>{messageToAdd}</h2>
             {/* <button onClick={()=> Storemessage}>enter</button> */}
             <button onClick={storeMessage}> submit</button>
