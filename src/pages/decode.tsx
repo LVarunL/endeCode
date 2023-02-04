@@ -7,6 +7,7 @@ import { collection, query, where } from "firebase/firestore";
 export const Decode = () => {
     const [messageID, setMessageID] = useState("");
     const [pw, setPW] = useState("");
+    const [msg, displaydata] = useState();
 
     const changeMessage=(event:any )=>{
         setMessageID(event.target.value);
@@ -30,7 +31,8 @@ export const Decode = () => {
             if(docSnap.exists()) {
                 console.log("hi");
                 console.log(docSnap.data());
-                
+                const dd:any = docSnap.data();
+                displaydata(dd.message);
             } else {
                 console.log("Document does not exist")
             }
@@ -58,6 +60,7 @@ export const Decode = () => {
             <p> {messageID}</p>
             <input type="password" onChange={addPW} placeholder="enter password..."/>
             <button onClick={searchID}> search </button>
+            <h1>{msg}</h1>
         </div>
     )
 }
