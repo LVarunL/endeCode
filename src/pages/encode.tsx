@@ -22,10 +22,13 @@ export const Encode = () => {
         })
         setMessageId(addedDoc.id);
         setWantToEncode(false);
+        navigator.clipboard.writeText(addedDoc.id); 
+        alert("key for your encoded message copied to clipboard");
     }
 
     const encodeAgain = () => {
         setWantToEncode(true);
+        setMessageToAdd("");
     }
         
     return (
@@ -45,8 +48,9 @@ export const Encode = () => {
                 : 
                 <>
                     <div>
-                        <h2> {messageId} </h2>
+                        <h2> Here is the key for your message : {messageId} </h2>
                         <button onClick={encodeAgain}> Encode Another </button>
+
                     </div>
                 </>
             }   
