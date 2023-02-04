@@ -1,25 +1,48 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs } from "firebase/firestore";
 import { useState } from "react";
 import { db } from "../config/firebase";
+import { collection, query, where } from "firebase/firestore";
 
 
 export const Decode = () => {
     const [messageID, setMessageID] = useState("");
     const [pw, setPW] = useState("");
 
-    const changeMessage=(data: any)=>{
-        setMessageID(data.target.value);
+    const changeMessage=(event:any )=>{
+        setMessageID(event.target.value);
     }
 
     const addPW=(data:any)=>{
         setPW(data.target.value);
     }
 
+    const searching = collection(db, "messages");
+
     const searchID=async()=>{
-        const docRef = doc(db,"messages" ,messageID);
+        const docRef = doc(db, "messages", messageID);
+        console.log(messageID);
         const docSnap = await getDoc(docRef);
+
+        try {
+            const docSnap = await getDoc(docRef);
+            console.log("hi");
+            //console.log(docSnap.data());
+            if(docSnap.exists()) {
+                console.log("hi");
+                console.log(docSnap.data());
+                
+            } else {
+                console.log("Document does not exist")
+            }
+        
+        } catch(error) {
+            console.log(error)
+        }
+
+        //const docRef = doc(db,"messages" ,messageID);
+        //const docSnap = await getDoc(docRef);
         const flag = "";
-        console.log(docSnap.data);
+        console.log(docSnap.data());
 
         return (
             <div> 
@@ -34,7 +57,7 @@ export const Decode = () => {
             <input type="text" onChange={changeMessage} placeholder="enter secret message..."/>
             <p> {messageID}</p>
             <input type="password" onChange={addPW} placeholder="enter password..."/>
-            <button> search </button>
+            <button onClick={searchID}> search </button>
         </div>
     )
 }
